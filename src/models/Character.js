@@ -5,7 +5,7 @@ const characterSchema = new mongoose.Schema(
         id: {type: String},
         name: {type: String, required: true},
         actor: {type: String, required: true},
-        community: {type: String, required: true},
+        community: {type: mongoose.Schema.Types.ObjectId, ref:'communityModel', required: true},
         kills: {type: Number}
     }
 )

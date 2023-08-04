@@ -3,14 +3,14 @@ import characterModel from "../models/Character";
 class CharacterController {
 
     static findAll = (req, res) => {
-        characterModel.find((err, characterModel) =>{
+        characterModel.find.populate("community").exec((err, characterModel) =>{
             res.send(characterModel);
         })
     }
 
     static findById = (req, res) => {
         let id = req.params.id;
-        characterModel.findById(id, (err, characterModel) => {
+        characterModel.findById.populate("community").exec(id, (err, characterModel) => {
             if(!error){
                 res.send(characterModel);
             }else{
