@@ -1,0 +1,12 @@
+{
+  "name": "alura-api-node-mongodb",
+  "version": "1.0.0",
+  "description": "✔ Project that contains a API Rest made with NodeJS and MongoDB as a Database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
