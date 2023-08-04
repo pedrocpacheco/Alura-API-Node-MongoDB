@@ -1,4 +1,5 @@
 import characterModel from "../models/Character";
+import communityModel from "../models/Community";
 
 class CharacterController {
 
@@ -17,6 +18,15 @@ class CharacterController {
                 res.status(404).send({ error: `Error to find Character: ${err.message}` })
             }
         });
+    }
+
+    static findByCommunity = (req, res) => { 
+        const community = req.query.community;
+
+        livros.find({"community.name": community}, {}, (err, characterModel) => {
+            if(!err) { res.send(characterModel) } 
+            else{ res.status(404).send({ error: "Community not founded" }) }
+        })
     }
 
     static save = (req, res) => {

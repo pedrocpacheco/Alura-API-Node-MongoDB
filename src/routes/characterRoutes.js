@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
     .get("/characters", CharacterController.findAll)
+    .get("/characters/busca", CharacterController.findByCommunity)
     .get("/characters/:id", CharacterController.findById)
     .post("/characters", CharacterController.save)
     .put("/characters/:id", CharacterController.update)
