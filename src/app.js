@@ -33,14 +33,17 @@ app.put("/books/:id", (req, res) =>{
     const book = { title }
 
     let index = findBooks(req.params.id);
-    books[index] = book;
-
-    res.status(201).json(book);
+    if(index !== -1){
+        books[index] = book;
+        res.status(201).json(book);
+    }else{
+        res.status(404).json({ error: "Book not founded" })
+    }
 });
 
 // * GET: Book by ID
 app.get("/books/:id", (req, res) =>{
-    let index = findBooks();
+    let index = findBooks(parseInt(req.params.id));
     if(index !== -1) {
         const book = books[index];
         res.json(book);
