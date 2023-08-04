@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 app.use(express.json())
 
-const books = [
+const characters = [
     { id: 1, "title": "Lord of the Rings" },
     { id: 2, "title": "Hobbit" }
 ];
@@ -13,55 +13,55 @@ app.get("/", (req, res) =>{
     return res.status(200).send("Hello World!");
 });
 
-// * GET: Books List
-app.get("/books", (req, res) =>{
-    return res.json(books);
+// * GET: characters List
+app.get("/characters", (req, res) =>{
+    return res.json(characters);
 });
 
-// ? POST: Create Book
-app.post("/books", (req, res) => {
+// ? POST: Create character
+app.post("/characters", (req, res) => {
     const { id, title } = req.body;
-    const book = { id, title }
-    books.push(book);
+    const character = { id, title }
+    characters.push(character);
 
-    res.status(201).json(book);
+    res.status(201).json(character);
 });
 
-//TODO PUT: Change Book by ID 
-app.put("/books/:id", (req, res) =>{
+//TODO PUT: Change character by ID 
+app.put("/characters/:id", (req, res) =>{
     const { title } = req.body;
-    const book = { title }
+    const character = { title }
 
-    let index = findBooks(req.params.id);
+    let index = findcharacters(req.params.id);
     if(index !== -1){
-        books[index] = book;
-        res.status(201).json(book);
+        characters[index] = character;
+        res.status(201).json(character);
     }else{
-        res.status(404).json({ error: "Book not founded" })
+        res.status(404).json({ error: "character not founded" })
     }
 });
 
-// * GET: Book by ID
-app.get("/books/:id", (req, res) =>{
-    let index = findBooks(parseInt(req.params.id));
+// * GET: character by ID
+app.get("/characters/:id", (req, res) =>{
+    let index = findcharacters(parseInt(req.params.id));
     if(index !== -1) {
-        const book = books[index];
-        res.json(book);
+        const character = characters[index];
+        res.json(character);
     }else{
-        res.status(404).json({ error: "Book not founded" })
+        res.status(404).json({ error: "character not founded" })
     }
 });
 
-// ! DELETE: Book by ID
-app.delete("/books/:id", (req, res) => {
+// ! DELETE: character by ID
+app.delete("/characters/:id", (req, res) => {
     let { id } = req.params;
-    let index = findBooks(id);
-    books.splice(index, 1); // ? Deleta so o item
-    res.send(`Book ${id} remove`);
+    let index = findcharacters(id);
+    characters.splice(index, 1); // ? Deleta so o item
+    res.send(`character ${id} remove`);
 })
 
-function findBooks(id){
-    return books.findIndex(book => book.id === id);
+function findcharacters(id){
+    return characters.findIndex(character => character.id === id);
 }
 
 export default app;
