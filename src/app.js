@@ -52,6 +52,14 @@ app.get("/books/:id", (req, res) =>{
     }
 });
 
+// ! DELETE: Book by ID
+app.delete("/books/:id", (req, res) => {
+    let { id } = req.params;
+    let index = findBooks(id);
+    books.splice(index, 1); // ? Deleta so o item
+    res.send(`Book ${id} remove`);
+})
+
 function findBooks(id){
     return books.findIndex(book => book.id === id);
 }
