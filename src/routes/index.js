@@ -1,5 +1,6 @@
 import express from "express";
-import characterModel from "../models/Character";
+import characterRoutes from "./characterRoutes.js"
+import communityRoutes from "./communityRoutes.js"
 
 const routes = (app) => {
     app.route("/").get((req, res) => {
@@ -8,7 +9,8 @@ const routes = (app) => {
 
     app.use(
         express.json(),
-        characterModel
+        characterRoutes,
+        communityRoutes
     )
 }
 
