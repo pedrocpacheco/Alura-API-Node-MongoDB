@@ -6,7 +6,8 @@ const router = express.Router();
 router
     .get("/characters", CharacterController.findAll)
     .get("/characters/:id", CharacterController.findById)
-    .post("/characters", CharacterController.saveCharacter)
-    .put("/characters/:id", CharacterController.updateCharacter)
+    .post("/characters", CharacterController.save)
+    .put("/characters/:id", CharacterController.update)
+    .delete("/character/:id", CharacterController.delete)
 
 export default router;

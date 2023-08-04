@@ -11,7 +11,7 @@ app.use(express.json());
 routes(app);
 
 
-// ! DELETE: character by ID
+// ! DELETE: character by IDa
 app.delete("/characters/:id", (req, res) => {
     let { id } = req.params;
     let index = findcharacters(id);

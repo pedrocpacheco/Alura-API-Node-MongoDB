@@ -19,7 +19,7 @@ class CharacterController {
         });
     }
 
-    static saveCharacter = (req, res) => {
+    static save = (req, res) => {
         let character = new characterModel(req.body);
         character.save((err) => { 
             if(err) {
@@ -30,16 +30,26 @@ class CharacterController {
          })
     }
 
-    static updateCharacter = (req, res) => {
-        const id = req.params.id;
-
+    static update = (req, res) => {
+        let id = req.params.id;
         characterModel.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if(!err){
-                res.status(200).message({ message: "Book updated!" })
+                res.send({ message: "Character updated!" })
             }else{
                 res.status(500).send({ error: `Error to Update: ${err.message}` })
             }
         });
+    }
+
+    static delete = (req, res) => { 
+        let id = req.params.id;
+        characterModel.findByIdAndRemove(id, (err) => {
+            if(!err){
+                req.send({ message: "Character removed!" });
+            } else{
+                req.send({ error: `Error to Delete: ${err.message}` })
+            }
+        })
     }
 
 }
