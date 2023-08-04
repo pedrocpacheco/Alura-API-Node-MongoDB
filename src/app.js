@@ -1,25 +1,15 @@
 import express from "express";
 import db from "./config/dbConnect.js"
 import characters from "./models/Character.js";
+import routes from "./routes/index.js";
 
 db.on("error", console.log.bind(console, "Error to connect to DB"));
 db.once("open", () => { console.log("DB Connection was succedded") });
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+routes(app);
 
-// * GET: Hello World
-app.get("/", (req, res) =>{
-    return res.status(200).send("Hello World!");
-});
-
-
-// * GET: characters List
-app.get("/characters", (req, res) =>{
-    characters.find((err, characters)=> {
-        res.json(characters);
-    })
-});
 
 // ? POST: Create character
 app.post("/characters", (req, res) => {
