@@ -1,6 +1,6 @@
 import express from "express";
 import db from "./config/dbConnect.js"
-import characters from "./models/Character.js";
+import characterModel from "./models/Character.js";
 import routes from "./routes/index.js";
 
 db.on("error", console.log.bind(console, "Error to connect to DB"));
@@ -11,34 +11,11 @@ app.use(express.json());
 routes(app);
 
 
-// ? POST: Create character
-app.post("/characters", (req, res) => {
-    const { id, title } = req.body;
-    const character = { id, title }
-    characters.push(character);
-
-    res.status(201).json(character);
-});
-
-//TODO PUT: Change character by ID 
-app.put("/characters/:id", (req, res) =>{
-    const { title } = req.body;
-    const character = { title }
-
-    let index = findcharacters(req.params.id);
-    if(index !== -1){
-        characters[index] = character;
-        res.status(201).json(character);
-    }else{
-        res.status(404).json({ error: "character not founded" })
-    }
-});
-
 // * GET: character by ID
 app.get("/characters/:id", (req, res) =>{
     let index = findcharacters(parseInt(req.params.id));
     if(index !== -1) {
-        const character = characters[index];
+        const character = characterModel[index];
         res.json(character);
     }else{
         res.status(404).json({ error: "character not founded" })
@@ -49,12 +26,12 @@ app.get("/characters/:id", (req, res) =>{
 app.delete("/characters/:id", (req, res) => {
     let { id } = req.params;
     let index = findcharacters(id);
-    characters.splice(index, 1); // ? Deleta so o item
+    characterModel.splice(index, 1); // ? Deleta so o item
     res.send(`character ${id} remove`);
 })
 
 function findcharacters(id){
-    return characters.findIndex(character => character.id === id);
+    return characterModel.findIndex(character => character.id === id);
 }
 
 export default app;

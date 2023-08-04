@@ -10,6 +10,6 @@ const characterSchema = new mongoose.Schema(
     }
 )
 
-const characters = mongoose.model("characters", characterSchema);
+const characterModel = mongoose.model("characters", characterSchema);
 
-export default characters;
+export default characterModel;

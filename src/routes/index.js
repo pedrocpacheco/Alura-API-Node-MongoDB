@@ -1,5 +1,5 @@
 import express from "express";
-import characters from "../models/Character";
+import characterModel from "../models/Character";
 
 const routes = (app) => {
     app.route("/").get((req, res) => {
@@ -8,7 +8,7 @@ const routes = (app) => {
 
     app.use(
         express.json(),
-        characters
+        characterModel
     )
 }
 
