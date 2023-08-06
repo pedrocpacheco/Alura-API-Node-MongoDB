@@ -1,5 +1,4 @@
-import characterModel from "../models/Character";
-import communityModel from "../models/Community";
+import characterModel from "../models/Character.js";
 
 class CharacterController {
 
